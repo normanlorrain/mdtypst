@@ -15,7 +15,6 @@ import click
 import glob
 
 from mdtypst.converter import Converter
-from mdtypst.properties import setTitle, setSubject, setAuthor, setKeywords, setPaperSize
 from mdtypst import log
 
 # TODO: consider pip install click-config-file
@@ -72,28 +71,28 @@ def cli(
     if not output:
         ctx.fail("No output specified.")
 
-    try:
-        if header:
-            Header.setFmt(header)
-        if footer:
-            Footer.setFmt(footer)
-    except Exception as e:
-        ctx.fail(f"{e} in header/footer template.")
+    # try:
+    #     if header:
+    #         Header.setFmt(header)
+    #     if footer:
+    #         Footer.setFmt(footer)
+    # except Exception as e:
+    #     ctx.fail(f"{e} in header/footer template.")
 
-    if title:
-        setTitle(title)
+    # if title:
+    #     setTitle(title)
 
-    if author:
-        setAuthor(author)
+    # if author:
+    #     setAuthor(author)
 
-    if subject:
-        setSubject(subject)
+    # if subject:
+    #     setSubject(subject)
 
-    if keywords:
-        setKeywords(keywords)
+    # if keywords:
+    #     setKeywords(keywords)
 
-    if paper:
-        setPaperSize(paper)
+    # if paper:
+    #     setPaperSize(paper)
 
     if inputs:
         log.init()
