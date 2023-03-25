@@ -15,7 +15,6 @@ import click
 import glob
 
 from mdtypst.converter import Converter
-from mdtypst.headfoot import Header, Footer
 from mdtypst.properties import setTitle, setSubject, setAuthor, setKeywords, setPaperSize
 from mdtypst import log
 

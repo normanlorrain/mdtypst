@@ -1,7 +1,5 @@
 import commonmark
-
-from . import log
-from .pdf_renderer import PdfRenderer
+from .typst import Renderer
 
 
 class Converter:

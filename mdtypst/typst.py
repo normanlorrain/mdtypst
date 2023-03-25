@@ -4,21 +4,11 @@
 
 import re
 from builtins import str
-import fitz
 from pathlib import Path
 
-
 from . import log
-from . import style
-from . import font
-from . import properties
-from .headfoot import Header, Footer
 
 
-fontSize = 10  # choose font size of text
-headingfontSizes = [18, 16, 14, 12, 10, 10, 10, 10]
-lineheight = fontSize * 1.2  # line height is 20% larger
-margin = 72
 
 # For images, we are looking for a pattern in the alt text,
 # e.g. Some text { width =31% }
@@ -29,49 +19,15 @@ imageWidthRe = re.compile(r"(.*){.*width\s*=\s*(\d+)%.*}")
 # https://regex101.com/r/8zgA9P/2
 
 
-class PdfRenderer:
-    def __init__(self, pdf):
-        self.list_data = list()  # to store the states of ordered/unordered list
-        # TODO: put this in render() Directory containing markdown (and images)
-        self.indir = None
-        self.pdf = pdf
-        self.doc = fitz.open()
-        self.toc = []
-        self.currentPage = None
-
-        global width, height
-        width, height = fitz.paper_size(properties.paperSize)  # choose paper format
-
+class Renderer:
+    def __init__(self):
+        pass
     def __del__(self):
+        pass
 
-        # Close the file.  If an exception occured, the attribute might not be present,
-        # so check first.
-        if hasattr(self, "doc"):
-            # If still None, we haven't processed an ast
-            if self.doc.page_count:
-                for i in range(len(self.toc)):
-                    log.debug(f"{i}, {self.toc[i]}")
-                try:
-                    self.doc.set_toc(self.toc)
-                except ValueError as e:
-                    log.exception("Bad heading level.  More information:")
-                    lastspace = str(e).rfind(" ")
-                    log.info(self.toc[int(str(e)[lastspace:])])
-                self.doc.set_metadata(properties.document)
-                try:
-                    self.doc.save(str(self.pdf), garbage=4, deflate=True)
-                except RuntimeError as e:
-                    log.exception(e)
-                self.doc.close()
-            else:
-                log.info("No pages to save")
-
-    def render(self, ast, inputFile):
-        self.infile = Path(inputFile).absolute()
-        self.indir = Path(inputFile).parent.resolve()
+    def render(self, ast):
         for node, entering in ast.walker():
             getattr(self, node.t)(node, entering)
-
         return
 
     def escape(self, text):

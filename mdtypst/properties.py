@@ -1,12 +1,11 @@
-import fitz
 import datetime
 
 # This dict is specific to pyMuPDF.
 # Keys can only be : format, encryption, title, author, subject, keywords, creator, producer, creationDate, modDate
 
 document = {
-    "creationDate": fitz.get_pdf_now(),  # current timestamp
-    "modDate": fitz.get_pdf_now(),  # current timestamp
+    # "creationDate": fitz.get_pdf_now(),  # current timestamp
+    # "modDate": fitz.get_pdf_now(),  # current timestamp
     "creator": "Python mdfpdf package: https://pypi.org/project/mdtypst",
     "producer": "PyMuPDF library: https://pypi.org/project/PyMuPDF",
     "title": None,
