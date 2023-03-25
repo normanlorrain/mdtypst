@@ -1,0 +1,12 @@
+# # See https://packaging.python.org/discussions/install-requires-vs-requirements/
+# pymupdf>=1.16.10
+# commonmark>=0.9.1
+# click>=7.0,<8
+
+# Developer requirements
+build
+twine
+flake8
+black
+pytest
+
